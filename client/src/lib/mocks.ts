@@ -1,0 +1,42 @@
+// export const mockJobs: Job[] = [
+//   {
+//     source: "LinkedIn",
+//     company: "TechCorp Inc.",
+//     title: "Software Engineer",
+//     state: "California",
+//     link: "https://www.linkedin.com/jobs/12345",
+//     city: "San Francisco",
+//   },
+//   {
+//     source: "Indeed",
+//     company: "HealthTech Solutions",
+//     title: "Data Analyst",
+//     state: "New York",
+//     link: "https://www.indeed.com/jobs/54321",
+//     city: "New York",
+//   },
+//   {
+//     source: "Glassdoor",
+//     company: "Eco Innovations",
+//     title: "Product Manager",
+//     state: "Texas",
+//     link: "https://www.glassdoor.com/jobs/67890",
+//     city: "Austin",
+//   },
+//   {
+//     source: "Monster",
+//     company: "CyberNetics",
+//     title: "Cybersecurity Specialist",
+//     state: "Washington",
+//     link: "https://www.monster.com/jobs/09876",
+//     city: "Seattle",
+//   },
+//   {
+//     source: "LinkedIn",
+//     company: "GreenFuture Corp.",
+//     title: "Environmental Consultant",
+//     state: "Oregon",
+//     link: "https://www.linkedin.com/jobs/23456",
+//     city: "Portland",
+//   },
+// ];

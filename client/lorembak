@@ -1,0 +1,12 @@
+  const lorem = `
+Libero cras vestibulum magna est quam, erat sit nascetur molestie. Arcu ante, vestibulum eu nunc dui ex at convallis velit. Tempor, rutrum consectetur libero etiam.
+
+Libero cras vestibulum magna est quam, erat sit nascetur molestie. Arcu ante, vestibulum eu nunc dui ex at convallis velit. Tempor, rutrum consectetur libero etiam.
+Libero cras vestibulum magna est quam, erat sit nascetur molestie. Arcu ante, vestibulum eu nunc dui ex at convallis velit. Tempor, rutrum consectetur libero etiam.
+
+Libero cras vestibulum magna est quam, erat sit nascetur molestie. Arcu ante, vestibulum eu nunc dui ex at convallis velit. Tempor, rutrum consectetur libero etiam.
+`;
+  const messages = [
+    { role: "user", content: lorem },
+    { role: "assistant", content: lorem },
+  ];

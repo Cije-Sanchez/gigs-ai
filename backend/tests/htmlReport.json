@@ -1,0 +1,41 @@
+{
+  "valid": false,
+  "results": [
+    {
+      "filePath": "inline",
+      "messages": [
+        {
+          "ruleId": "element-required-attributes",
+          "ruleUrl": "https://html-validate.org/rules/element-required-attributes.html",
+          "severity": 2,
+          "message": "<button> is missing required \"type\" attribute",
+          "offset": 108,
+          "line": 4,
+          "column": 6,
+          "size": 6,
+          "selector": "div > button",
+          "context": {
+            "element": "button",
+            "attribute": "type"
+          }
+        },
+        {
+          "ruleId": "close-order",
+          "ruleUrl": "https://html-validate.org/rules/close-order.html",
+          "severity": 2,
+          "message": "Mismatched close-tag, expected '</div>' but found '</p>'.",
+          "offset": 232,
+          "line": 7,
+          "column": 4,
+          "size": 2,
+          "selector": null
+        }
+      ],
+      "errorCount": 2,
+      "warningCount": 0,
+      "source": "\nHere you go\n <div class=\"bg-red-500 w-64 h-64 flex items-center justify-center rounded-lg shadow-lg\">\n    <button class=\"bg-white text-red-500 px-4 py-2 rounded-full font-semibold hover:bg-red-100\">\n      Click Me\n    </button>\n  </p>\n"
+    }
+  ],
+  "errorCount": 2,
+  "warningCount": 0
+}

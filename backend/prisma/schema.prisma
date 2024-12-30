@@ -1,0 +1,95 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("TIMESCALE_DB_URL")
+  extensions = [vector]
+}
+
+model User {
+  id     Int    @id @default(autoincrement())
+  userId String
+  trials Int
+}
+
+model Job {
+  id                            Int                             @id @default(autoincrement())
+  title                         String
+  description                   String
+  source                        String
+  location                      String
+  link                          String
+  timePosted                    String
+  experienceLevel               String
+  compensation                  String
+  type                          String
+  jobId                         String
+  Job_embedding_store           Job_embedding_store[]
+  public_Job_embedding_v2_store public_Job_embedding_v2_store[]
+  public_Job_embedding_v3_store public_Job_embedding_v3_store[]
+}
+
+model SearchCache {
+  id            Int      @id @default(autoincrement())
+  searchQuery   String
+  searchDate    DateTime
+  searchResults String
+}
+
+model Userv2 {
+  id                  Int      @id @default(autoincrement())
+  userId              String
+  searchDate          DateTime
+  stringifiedMessages String
+}
+
+model SummaryCache {
+  id             Int      @id @default(autoincrement())
+  summaryQuey    String
+  summaryDate    DateTime
+  summaryResults String
+}
+
+model SearchEmbeddingCache {
+  id              Int    @id @default(autoincrement())
+  searchEmbedding String
+  searchId        String
+}
+
+model Job_embedding_store {
+  embedding_uuid String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id             Int
+  chunk_seq      Int
+  chunk          String
+  embedding      Unsupported("vector")
+  Job            Job                   @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([id, chunk_seq])
+}
+
+model public_Job_embedding_v2_store {
+  embedding_uuid String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id             Int
+  chunk_seq      Int
+  chunk          String
+  embedding      Unsupported("vector")
+  Job            Job                   @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([id, chunk_seq])
+  @@map("public.Job_embedding_v2_store")
+}
+
+model public_Job_embedding_v3_store {
+  embedding_uuid String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id             Int
+  chunk_seq      Int
+  chunk          String
+  embedding      Unsupported("vector")
+  Job            Job                   @relation(fields: [id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([id, chunk_seq])
+  @@map("public.Job_embedding_v3_store")
+}

@@ -1,1 +1,0 @@
-# Express-MongoDB-Prisma-Starter

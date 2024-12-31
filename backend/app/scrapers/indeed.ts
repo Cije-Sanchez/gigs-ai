@@ -3,6 +3,10 @@ import * as puppeteer from "puppeteer";
 import { Selectors } from "./Selectors";
 const { indeed } = Selectors;
 import fs from "fs";
+import axios from "axios";
+import cron from "node-cron";
+import dotenv from "dotenv";
+dotenv.config();
 
 async function getLinks(days: 1 | 14 = 1) {
   const browser = await puppeteer.launch({
@@ -307,7 +311,7 @@ async function indeedSeedScrape() {
   const links = [];
   const experienceLevels = ["MID_LEVEL", "ENTRY_LEVEL", "SENIOR_LEVEL"];
   const PAGES_PER_EXPERIENCE = 30;
-  const SBR_WS_ENDPOINT = `wss://brd-customer-hl_8400e525-zone-scraping_browser1:wrxj0ypzd337@brd.superproxy.io:9222`;
+  const SBR_WS_ENDPOINT = process.env.SBR_WS_ENDPOINT;
   for (const [index, experience] of experienceLevels.entries()) {
     const baseLink = `https://www.indeed.com/jobs?q=software&l=&fromage=14&sc=0kf:attr(DSQF7)explvl(${experience});&from=searchOnDesktopSerp`;
     for (let i = 3; i < PAGES_PER_EXPERIENCE; i++) {
@@ -379,3 +383,17 @@ async function indeedSeedScrape() {
 }
 
 indeedSeedScrape();
+
+cron.schedule("*/4 * * * *", async () => {
+  const currentTime = new Date().toISOString();
+  console.log(`Cron job triggered at: ${currentTime}`);
+
+  try {
+    await indeedDailyScrape();
+    console.log(`Scraped Indeed`);
+  } catch (error) {
+    console.error(`Error occurred`);
+  }
+});
+
+console.log("Cron job initialized. It will run every 4 minutes.");

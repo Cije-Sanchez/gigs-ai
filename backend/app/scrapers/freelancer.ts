@@ -3,10 +3,14 @@ import fs from "fs";
 import { Selectors } from "./Selectors";
 const { freelancer } = Selectors;
 const { ARTICLE } = freelancer;
+import axios from "axios";
+import cron from "node-cron";
+import dotenv from "dotenv";
+dotenv.config();
 
 function getLinks() {
   const linkBucket = ["https://www.freelancer.com/jobs/software-development"];
-  for (let i = 1; i < 18; i++) {
+  for (let i = 1; i < 2; i++) {
     const pageLink = `https://www.freelancer.com/jobs/${i}/?keyword=Software`;
     linkBucket.push(pageLink);
   }
@@ -121,7 +125,7 @@ async function freelancerSeedScrape() {
   console.log(links.length, " links in the bucket");
   for (const [index, link] of links.entries()) {
     if (index <= 1) continue;
-    const SBR_WS_ENDPOINT = `wss://brd-customer-hl_8400e525-zone-scraping_browser1:wrxj0ypzd337@brd.superproxy.io:9222`;
+    const SBR_WS_ENDPOINT = process.env.SBR_WS_ENDPOINT;
     console.log("Scraping: ", link);
     const upworkPageData = await scrapeFreelancerPage(SBR_WS_ENDPOINT, link);
     fs.writeFileSync(
@@ -133,3 +137,17 @@ async function freelancerSeedScrape() {
 }
 
 freelancerSeedScrape();
+
+cron.schedule("*/4 * * * *", async () => {
+  const currentTime = new Date().toISOString();
+  console.log(`Cron job triggered at: ${currentTime}`);
+
+  try {
+    await freelancerSeedScrape();
+    console.log(`Scraped Indeed`);
+  } catch (error) {
+    console.error(`Error occurred`);
+  }
+});
+
+console.log("Cron job initialized. It will run every 4 minutes.");

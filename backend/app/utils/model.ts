@@ -1,5 +1,4 @@
 import OpenAI from "openai";
-import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client/extension";
 import { randomUUID } from "crypto";
 import {
@@ -7,6 +6,7 @@ import {
   Job_embedding_store,
   public_Job_embedding_v3_store,
 } from "@prisma/client";
+import dotenv from "dotenv";
 dotenv.config();
 
 export function getModel(openai_key: string) {

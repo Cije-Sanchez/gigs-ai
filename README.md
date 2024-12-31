@@ -6,12 +6,15 @@
 
 1. Make sure **Git**, **NodeJS**, and **PostgreSQL** are installed.
 2. Clone this repository to your local computer.
-3. Navigate to the backend directory and run:
+3. Navigate to the backend directory:
+4. Setup your .env file: You'll need OPENAI_KEY and TIMESCALE_DB_URL
+5. Run:
    ```bash
    npm install
    npm run dev
    ```
-4. Navigate to the client directory and run:
+6. Navigate to the client directory:
+7. Run:
    ```bash
    npm install
    npm run dev
